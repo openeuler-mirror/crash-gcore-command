@@ -1,6 +1,6 @@
 Name:           crash-gcore-command
 Version:        1.3.1
-Release:        1
+Release:        2
 Summary:        Command of Gcore for Crash utility
 
 License:        GPLv2
@@ -8,7 +8,7 @@ URL:            http://people.redhat.com/anderson/extensions/%{name}-%{version}.
 Source:         %{name}-%{version}.tar.gz
 
 Buildroot:      %{_tmppath}/%{name}-root
-BuildRequires:  zlib-devel lzo-devel snappy-devel crash-devel >= 5.1.5
+BuildRequires:  zlib-devel lzo-devel snappy-devel crash-devel >= 5.1.5 gcc
 Requires:       crash >= 5.1.5
 
 %description
@@ -31,6 +31,9 @@ install -D %{_builddir}/%{name}-%{version}/gcore.so %{buildroot}%{_libdir}/crash
 %{_libdir}/crash/extensions/gcore.so
 
 %changelog
+* Mon May 31 2021 baizhonggui <baizhonggui@huawei.com> - 1.3.1-2
+- Add gcc in BuildRequires
+
 * Thu Nov 28 2019 daiqianwen <daiqianwen@huawei.com> - 1.3.1-1
 - Package init
 
