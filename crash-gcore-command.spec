@@ -1,6 +1,7 @@
+%global reponame crash-gcore
 Name:           crash-gcore-command
-Version:        1.3.1
-Release:        2
+Version:        1.6.3
+Release:        1
 Summary:        Command of Gcore for Crash utility
 
 License:        GPLv2
@@ -17,13 +18,13 @@ that adds a "gcore" command which can create a core dump file of a user-space ta
 that was running in a kernel dumpfile.
 
 %prep
-%autosetup -n %{name}-%{version} -p1
+%autosetup -n %{reponame}-%{version} -p1
 
 %build
-%make_build -f gcore.mk
+%make_build -C src -f gcore.mk
 
 %install
-install -D %{_builddir}/%{name}-%{version}/gcore.so %{buildroot}%{_libdir}/crash/extensions/gcore.so
+install -D %{_builddir}/%{reponame}-%{version}/src/gcore.so %{buildroot}%{_libdir}/crash/extensions/gcore.so
 
 %files
 %defattr(-,root,root)
@@ -31,6 +32,9 @@ install -D %{_builddir}/%{name}-%{version}/gcore.so %{buildroot}%{_libdir}/crash
 %{_libdir}/crash/extensions/gcore.so
 
 %changelog
+* Tue Jan 18 2022 SimpleUpdate Robot <tc@openeuler.org> - 1.6.3-1
+- Upgrade to version 1.6.3
+
 * Mon May 31 2021 baizhonggui <baizhonggui@huawei.com> - 1.3.1-2
 - Add gcc in BuildRequires
 
