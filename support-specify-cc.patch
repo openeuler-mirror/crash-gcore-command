@@ -1,0 +1,26 @@
+diff -up crash-gcore-1.6.3/Makefile.orig crash-gcore-1.6.3/Makefile
+diff -up crash-gcore-1.6.3/src/gcore.mk.orig crash-gcore-1.6.3/src/gcore.mk
+--- crash-gcore-1.6.3/src/gcore.mk.orig	2023-04-14 18:26:33.886844165 +0800
++++ crash-gcore-1.6.3/src/gcore.mk	2023-04-14 18:28:05.019145042 +0800
+@@ -17,6 +17,7 @@ DATE=7 Dec 2021
+ PERIOD=2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021
+ 
+ ARCH=UNSUPPORTED
++CC?=gcc
+ 
+ ifeq ($(shell arch), i686)
+   TARGET=X86
+@@ -112,11 +113,11 @@ gcore.so: gcore.c $(INCDIR)/defs.h
+ 		echo "gcore: architecture not supported"; \
+ 	else \
+ 		make -f gcore.mk $(GCORE_OFILES) && \
+-		gcc $(RPM_OPT_FLAGS) $(CFLAGS) $(TARGET_CFLAGS) $(COMMON_CFLAGS) $(ARCH_CFLAGS) -nostartfiles -shared -rdynamic $(GCORE_OFILES) -Wl,-soname,$@ -o $@ $< ; \
++		$(CC) $(RPM_OPT_FLAGS) $(CFLAGS) $(TARGET_CFLAGS) $(COMMON_CFLAGS) $(ARCH_CFLAGS) -nostartfiles -shared -rdynamic $(GCORE_OFILES) -Wl,-soname,$@ -o $@ $< ; \
+ 	fi;
+ 
+ %.o: %.c $(INCDIR)/defs.h
+-	gcc $(RPM_OPT_FLAGS) $(CFLAGS) $(TARGET_CFLAGS) $(COMMON_CFLAGS) $(ARCH_CFLAGS) -c -o $@ $<
++	$(CC) $(RPM_OPT_FLAGS) $(CFLAGS) $(TARGET_CFLAGS) $(COMMON_CFLAGS) $(ARCH_CFLAGS) -c -o $@ $<
+ 
+ clean:
+ 	rm -f gcore.so

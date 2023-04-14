@@ -1,12 +1,13 @@
 %global reponame crash-gcore
 Name:           crash-gcore-command
 Version:        1.6.3
-Release:        1
+Release:        2
 Summary:        Command of Gcore for Crash utility
 
 License:        GPLv2
 URL:            http://people.redhat.com/anderson/extensions/%{name}-%{version}.tar.gz
 Source:         %{name}-%{version}.tar.gz
+Patch0:         support-specify-cc.patch
 
 Buildroot:      %{_tmppath}/%{name}-root
 BuildRequires:  zlib-devel lzo-devel snappy-devel crash-devel >= 5.1.5 gcc
@@ -32,6 +33,9 @@ install -D %{_builddir}/%{reponame}-%{version}/src/gcore.so %{buildroot}%{_libdi
 %{_libdir}/crash/extensions/gcore.so
 
 %changelog
+* Fri Apr 14 2023 jammyjellyfish <jammyjellyfish255@outlook.com> - 1.6.3-2
+- Support specify CC
+
 * Tue Jan 18 2022 SimpleUpdate Robot <tc@openeuler.org> - 1.6.3-1
 - Upgrade to version 1.6.3
 
